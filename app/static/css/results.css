@@ -1,0 +1,10 @@
+.main {
+	margin: 0 5%;
+}
+.name {
+    text-align: center;
+}
+th, td {
+	color: white;
+	text-align: center;
+}

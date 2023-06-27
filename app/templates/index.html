@@ -1,0 +1,19 @@
+<html>
+	<head>
+		{% include "configuration.html" %}
+		<link rel="stylesheet" href="../static/css/index.css">
+	</head>
+	<body>
+		{% include "navbar.html" %}
+		<div class="container mt-4 mb-4 main">
+			{% for quiz in quizzes %}
+				<a class="card text-white bg-{{quiz.color}} bg-gradient mb-3 hover-shadow border border-dark" href="/info/{{quiz.name}}">
+					<div class="card-body">
+						<h5 class="card-title">{{quiz.name.replace("_", " ")}}</h5>
+						<p class="card-text">{{quiz.description}}</p>
+					</div>
+				</a>
+			{% endfor %}
+		</div>
+	</body>
+</html>

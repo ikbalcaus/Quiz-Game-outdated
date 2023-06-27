@@ -1,0 +1,18 @@
+<html>
+	<head>
+		{% include "configuration.html" %}
+		<link rel="stylesheet" href="../static/css/result.css">
+	</head>
+	<body>
+		{% include "navbar.html" %}
+		<div class="main bg-{{quiz.color}} rounded border border-dark shadow">
+            <h3 class="text-white name mb-2">{{quiz.name.replace("_", " ")}}</h3>
+            <p class="text">Hello {{nickname}}, your score is {{score}}%</p>
+            <p class="text second-paragraph">You have {{correctAnswers}} correct answers</p>
+            <div class="btn-inline">
+                <a href="/info/{{quiz.name}}" class="btn text-white btn-custom">Try again</a>
+                <a href="/results/{{quiz.name}}" class="btn text-white btn-custom">See all results</a>
+            </div>
+		</div>
+	</body>
+</html>

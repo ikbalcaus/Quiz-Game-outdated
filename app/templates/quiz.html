@@ -1,0 +1,35 @@
+<html>
+	<head>
+		{% include "configuration.html" %}
+		<link rel="stylesheet" href="../static/css/quiz.css">
+	</head>
+	<body>
+		{% include "navbar.html" %}
+		<div class="container mt-4 mb-4">
+			<form action="/result/{{quiz.name}}" method="post">
+				<div class="main">
+					{% for question in quiz.questions %}
+						<div class="card text-white bg-{{quiz.color}} bg-gradient mb-3 border border-dark" href="/info/{{quiz.name}}">
+							<div class="card-body">
+								<h5 class="card-title">{{question.name}}</h5>
+								{% for answer in question.answers %}
+									<div class="form-check">
+										<input type="checkbox" id="answer{{answer.id}}" class="form-check-input" name="answers{{question.id}}" value="{{answer.id}}">
+										<label class="form-check-label" for="answer{{answer.id}}">{{answer.name}}</label>
+									</div>
+								{% endfor %}
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+				<input type="hidden" id="duration" name="duration" value="0">
+				<input type="hidden" name="nickname" value="{{nickname}}">
+				<button id="btn-submit" class="btn btn-{{quiz.color}} border border-dark mt-3">Submit</button>
+			</form>
+		</div>
+		<script src="../static/js/libraries/jquery.min.js"></script>
+		<script>
+			{% include "js/quiz.js" %}{% block quizScript %}{% endblock %}
+		</script>
+	</body>
+</html>

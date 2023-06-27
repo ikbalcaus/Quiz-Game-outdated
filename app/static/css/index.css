@@ -1,0 +1,12 @@
+.main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.card {
+    width: 300px;
+    margin: 10px;
+}
+.card-body {
+    cursor: pointer;
+}

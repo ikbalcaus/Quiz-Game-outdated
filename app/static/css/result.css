@@ -1,0 +1,33 @@
+.main {
+	width: 500px;
+	position: absolute;
+	left: 50%;
+	top: 48%;
+	margin-top: 0;
+	transform: translate(-50%, -50%);
+	padding: 20px 30px 30px 30px;
+}
+.name {
+    text-align: center;
+}
+.btn-inline {
+	display: flex;
+	justify-content: space-around;
+}
+.btn-custom {
+	font-weight: bold;
+	width: 47%;
+}
+.text {
+	text-align: center;
+	color: white;
+}
+.second-paragraph{
+	margin-top: -15px;
+}
+
+@media (max-width: 500px) {
+	.main {
+		width: 85%;
+	}
+}

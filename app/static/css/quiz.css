@@ -1,0 +1,16 @@
+.main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.card {
+    margin: 10px;
+    width: 300px;
+}
+#btn-submit {
+    width: 250px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: bold;
+}

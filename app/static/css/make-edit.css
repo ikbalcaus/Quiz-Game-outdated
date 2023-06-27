@@ -1,0 +1,50 @@
+.main {
+    margin: 0 10%;
+}
+.label-input {
+    margin-bottom: 20px;
+}
+textarea {
+    resize: none;
+}
+.btn-group {
+    display: flex;
+}
+.label-check {
+    width: 25%;
+    font-weight: bold;
+}
+.center-items {
+    text-align: center;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 35%;
+}
+.delete-quiz {
+    font-size: 12px;
+}
+.delete-quiz:focus {
+	border-color: inherit;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+#all-questions {
+    display: flex;
+    flex-direction: column-reverse;
+    margin-bottom: 50px;
+}
+.answer-to-add, .answers {
+    width: 75%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.answers {
+    display: flex;
+    flex-direction: column-reverse;
+}
+.form-check-input {
+    position: relative;
+    top: 2px;
+}

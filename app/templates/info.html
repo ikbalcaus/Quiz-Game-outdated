@@ -1,0 +1,22 @@
+<html>
+	<head>
+		{% include "configuration.html" %}
+		<link rel="stylesheet" href="../static/css/info.css">
+	</head>
+	<body>
+		{% include "navbar.html" %}
+		{% include "alerts.html" %}
+		<form class="main bg-{{quiz.color}} rounded border border-dark shadow" action="/quiz/{{quiz.name}}" method="post">
+			<h3 class="text-white">{{quiz.name.replace("_", " ")}}</h3>
+			<p class="text-white">{{quiz.description}}</p>
+			<input type="text" class="form-control border border-dark mt-3 nickname" name="nickname" placeholder="Enter your nickname" maxlength="30" spellcheck="false" autocomplete="off" required>
+			<p class="text-white">Number of questions: {{quiz.numberOfQuestions}}</p>
+			<p class="text-white">Duration: {{quiz.duration}} min</p>
+			<button class="btn btn-block text-white big-btn mt-3">Start</button>
+			<div class="btn-inline">
+				<a href="/edit/{{quiz.name}}" class="btn text-white small-btn">Edit</a>
+				<a href="/results/{{quiz.name}}" class="btn text-white small-btn">See results</a>
+			</div>
+		</form>
+	</body>
+</html>

@@ -1,0 +1,92 @@
+<html>
+	<head>
+		{% include "configuration.html" %}
+		<link rel="stylesheet" href="../static/css/make-edit.css">
+	</head>
+	<body>
+		{% include "navbar.html" %}
+		{% include "alerts.html" %}
+		<div class="container mt-4">
+			<form class="main" action="{{'/edit/' + quiz.name if quiz else '/make'}}" method="post">
+				<div class="label-input">
+					<label for="name">Quiz name:</label>
+					<input type="text" id="name" class="form-control" name="name" maxlength="30" value="{{quiz.name if quiz}}" pattern="{{regex}}" spellcheck="false" autocomplete="off" required>
+				</div>
+				<div class="label-input">
+					<label for="description">Description:</label>
+					<textarea id="description" class="form-control" name="description" maxlength="100" spellcheck="false">{{quiz.description if quiz}}</textarea>
+				</div>
+				<div class="label-input">
+					<label for="duration">Duration in minutes:</label>
+					<input type="number" id="duration" class="form-control" name="duration" min="1" max="60" value="{{quiz.duration if quiz else 10}}" spellcheck="false" required>
+				</div>
+				<div class="label-input">
+					<label for="password">Password:</label>
+					<input type="password" id="password" class="form-control" name="password" maxlength="30" value="{{quiz.password if quiz}}">
+				</div>
+				<div class="label-input">
+					<label>Color: </label>
+					<div class="btn-group">
+						<input type="radio" class="btn-check" name="color" value="primary" id="primary" {{"checked" if (quiz and quiz.color == "primary") or not quiz}}>
+						<label class="btn btn-primary label-check" for="primary">Blue</label>
+						<input type="radio" class="btn-check" name="color" value="success" id="success" {{"checked" if (quiz and quiz.color == "success")}}>
+						<label class="btn btn-success label-check" for="success">Green</label>
+						<input type="radio" class="btn-check" name="color" value="danger" id="danger" {{"checked" if (quiz and quiz.color) == "danger"}}>
+						<label class="btn btn-danger label-check" for="danger">Red</label>
+						<input type="radio" class="btn-check" name="color" value="warning" id="warning" {{"checked" if (quiz and quiz.color == "warning")}}>
+						<label class="btn btn-warning label-check" for="warning">Yellow</label>
+					</div>
+				</div>
+				<input type="hidden" name="passwordToSubmit" value="{{passwordToSubmit if passwordToSubmit}}">
+				<div class="center-items">
+					<button class="form-control btn btn-dark">Submit</button>
+					<div class="mt-2">
+						<a href="{{'/delete/' + quiz.name if quiz else '/'}}" class="form-control text-primary border-0 delete-quiz">Click here to delete quiz</a>
+					</div>
+				</div>
+			</form>
+			{% if quiz %}
+				<div class="input-group mt-3 mb-3">
+					<input type="text" id="question-to-add" class="form-control border-top-0 border-start-0" placeholder="Add question" maxlength="100" spellcheck="false" autocomplete="off">
+					<button class="btn btn-sm btn-secondary" onclick="addQuestion()">
+						<i class="fas fa-plus"></i>
+					</button>
+				</div>
+				<ul id="all-questions">
+					{% for question in quiz.questions %}
+						<li id="question{{question.id}}">
+							<div class="input-group mt-2">
+								<input type="text" id="question-input{{question.id}}" class="form-control border-top-0 border-start-0" value="{{question.name}}" onchange="updateQuestion({{question.id}})" maxlength="100" spellcheck="false" autocomplete="off">
+								<button class="btn btn-sm btn-secondary" onclick="removeQuestion({{question.id}})">
+									<i class="fas fa-minus"></i>
+								</button>
+							</div>
+							<div class="input-group input-group-sm answer-to-add">
+								<input type="text" id="answer-to-add{{question.id}}" class="form-control border-top-0 border-start-0" placeholder="Add answer" maxlength="50" spellcheck="false" autocomplete="off">
+								<button class="btn btn-sm btn-secondary" onclick="addAnswer({{question.id}})">
+									<i class="fas fa-plus"></i>
+								</button>
+							</div>
+							<div id="answers{{question.id}}" class="answers">
+								{% for answer in question.answers %}
+									<div id="answer{{answer.id}}" class="input-group input-group-sm answer">
+										<input type="checkbox" class="form-check-input" onclick="changeStateAnswer({{answer.id}})" {{"checked" if answer.isCorrect == 1}}>
+										<input type="text" id="answer-input{{answer.id}}" class="form-control border-top-0 border-start-0" value="{{answer.name}}" onchange="updateAnswer({{answer.id}})" maxlength="50" spellcheck="false" autocomplete="off">
+										<button class="btn btn-sm btn-secondary" onclick="removeAnswer({{answer.id}})">
+											<i class="fas fa-minus"></i>
+										</button>
+									</div>
+								{% endfor %}
+							</div>
+						</li>
+					{% endfor %}
+				</ul>
+				<script src="../static/js/libraries/jquery.min.js"></script>
+				<script>
+					{% include "js/questions.js" %}{% block questionsScript %}{% endblock %}
+					{% include "js/answers.js" %}{% block answersScript %}{% endblock %}
+				</script>
+			{% endif %}
+		</div>
+	</body>
+</html>

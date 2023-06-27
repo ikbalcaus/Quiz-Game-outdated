@@ -1,0 +1,36 @@
+<html>
+	<head>
+		{% include "configuration.html" %}
+		<link rel="stylesheet" href="../static/css/results.css">
+	</head>
+	<body>
+		{% include "navbar.html" %}
+		<div class="container">
+			<div class="main bg-{{quiz.color}} rounded border border-dark shadow mt-5 mb-5">
+				<h3 class="text-white name mt-4">{{quiz.name.replace("_", " ")}}</h3>
+				<table class="table table-sm table-borderless">
+					<thead>
+						<tr>
+							<th>Nickname</th>
+							<th>Score</th>
+							<th>Correct answers</th>
+							<th>Duration</th>
+							<th>Date and time</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for result in quiz.results %}
+							<tr>
+								<td>{{result.nickname}}</td>
+								<td>{{result.score}}%</td>
+								<td>{{result.correctAnswers}}</td>
+								<td>{{result.duration}} min</td>
+								<td>{{result.date}}</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</body>
+</html>
